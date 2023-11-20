@@ -1,47 +1,71 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/22 09:45:06 by panger            #+#    #+#              #
-#    Updated: 2023/11/18 18:35:40 by panger           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME				=	fdf
 
 include config/srcs.mk
+SRC_PATH			=	srcs/
+DIR_BUILD			=	.build/
+OBJS				=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
+DEPS				=	$(patsubst %.c, $(DIR_BUILD)%.d, $(SRCS))
+DEPS_FLAGS			=	-MMD -MP
+BASE_CFLAGS			=	-Wall -Wextra -Werror
+BASE_DEBUG_CFLAGS	=	-g3
+DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=address
+# DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=memory -fsanitize-memory-track-origins
+# FLAGS				=	$(BASE_CFLAGS) -g3
+# FLAGS				=	$(BASE_CFLAGS) -g3
+# FLAGS				=	$(BASE_CFLAGS) $(BASE_DEBUG_CFLAGS)
+FLAGS				=	$(BASE_CFLAGS)
+# FLAGS			=	$(BASE_CFLAGS) $(DEBUG_CLFAGS)
+# FLAGS				=	$(BASE_CFLAGS) $(DEBUG_CLFAGS)
+RM					=	rm -rf
+AR					=	ar rcs
 
-NAME=			fdf
-CC=				cc
-FLAGS=			-Wall -Wextra -Werror 
-HEADER_DIR=		./includes/
-HEADER=			$(HEADER_DIR)
+MINILIBX_PATH		=	minilibx/
+MINILIBX_INCLUDES	=	$(MINILIBX_PATH)
+MINILIBX_L			=	-L $(MINILIBX_PATH) -l mlx
+MINILIBX_A			=	$(MINILIBX_PATH)libmlx.a
+MAKE_MINILIBX		=	$(MAKE) -C $(MINILIBX_PATH)
 
-MLX			=	minilibx/
-MLX_A		=	$(MLX)libmlx.a
+DIR_INCS =\
+	include/			\
+	$(MINILIBX_INCLUDES)
+INCLUDES =\
+	$(addprefix -I , $(DIR_INCS))
 
-OBJS=$(SRCS:.c=.o)
-OBJS_DIR=.objects/
+LIBS = \
+	-lm	\
+	$(MINILIBX_L)	\
+	-lXext	\
+	-lX11
 
+DEPENDENCIES =\
+	$(MINILIBX_A)
 
-all : $(NAME)
+.PHONY:		all
+all:
+			$(MAKE_MINILIBX)
+			$(MAKE) $(NAME)
 
-re: fclean all
+$(NAME):	$(OBJS)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o : %.c $(HEADER) ./minilibx/mlx.h
-	$(CC) $(FLAGS) -I$(HEADER_DIR) -Iminilibx -c $< -o $@
-
-
-$(NAME):		$(OBJS) $(MLX_A)
-				@$(CC) $(CFLAGS) $(OBJS) -L$(MLX) -lmlx -lm -o $(NAME)
-#$(NAME): $(OBJS) $(HEADER_DIR)
-#	$(CC) $(FLAGS) -I $(HEADER_DIR) -Lminilibx-linux -lminilibx-linux -Iminilibx-linux -lmlx -lXext -lX11 -o $(NAME) $(OBJS)
-
+.PHONY:	clean
 clean:
-	rm -rf $(OBJS) $(OBJS_BONUS)
+			$(MAKE_MINILIBX) clean
+			$(RM) $(DIR_BUILD)
 
-fclean:
-	rm -rf $(OBJS) $(OBJS_BONUS) $(NAME)
+.PHONY:	fclean
+fclean:	clean
+			$(RM) $(NAME)
 
-.PHONY: clean fclean all re
+.PHONY:	debug
+debug:
+			$(MAKE) -j FLAGS="$(DEBUG_CLFAGS)"
+
+.PHONY:	re
+re:		fclean
+			$(MAKE) all
+
+-include $(DEPS)
+$(DIR_BUILD)%.o : $(SRC_PATH)%.c $(LIBFT_A)
+			@mkdir -p $(shell dirname $@)
+			$(CC) $(FLAGS) $(DEPS_FLAGS) $(INCLUDES) -c $< -o $@

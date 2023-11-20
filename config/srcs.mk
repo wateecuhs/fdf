@@ -1,1 +1,1 @@
-SRCS= ./srcs/main.c
+SRCS= main.c
