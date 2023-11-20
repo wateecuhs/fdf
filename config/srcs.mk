@@ -1,0 +1,1 @@
+SRCS= ./srcs/main.c
