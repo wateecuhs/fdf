@@ -4,6 +4,7 @@ include config/srcs.mk
 SRC_PATH			=	srcs/
 DIR_BUILD			=	.build/
 OBJS				=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
+OBJS_TEST			=	$(patsubst %.c, $(DIR_BUILD)%.o, $(TEST))
 DEPS				=	$(patsubst %.c, $(DIR_BUILD)%.d, $(SRCS))
 DEPS_FLAGS			=	-MMD -MP
 BASE_CFLAGS			=	-Wall -Wextra -Werror
@@ -44,6 +45,9 @@ DEPENDENCIES =\
 all:
 			$(MAKE_MINILIBX)
 			$(MAKE) $(NAME)
+
+test:	$(OBJS_TEST)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS_TEST) $(LIBS) -o $(NAME)
 
 $(NAME):	$(OBJS)
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
