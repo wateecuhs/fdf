@@ -1,6 +1,7 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct	s_vars {
 	void	*mlx;
@@ -8,7 +9,7 @@ typedef struct	s_vars {
 	void	*img;
 }				t_vars;
 
-int	close(t_vars *vars)
+int	cross_close(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
 	exit(EXIT_SUCCESS);
@@ -39,7 +40,7 @@ int	main(void)
 	if (!(vars.win))
 		exit(EXIT_FAILURE);
 	mlx_hook(vars.win, 2, 1L<<0, close_esc, &vars);
-	mlx_hook(vars.win, 17, 1L<<0, close, &vars);
+	mlx_hook(vars.win, 17, 1L<<0, cross_close, &vars);
 	vars.img = mlx_new_image(vars.mlx, 1920, 1080);
 	buffer = mlx_get_data_addr(vars.img, &pixel_bits, &line_bytes, &endian);
 	int color = 0xF2BAC9;
@@ -48,23 +49,25 @@ int	main(void)
 		color = mlx_get_color_value(vars.mlx, color);
 
 	for(int y = 0; y < 1080; ++y)
-	for(int x = 0; x < 1920; ++x)
 	{
-		int pixel = (y * line_bytes) + (x * 4);
-
-		if (endian == 1)        // Most significant (Alpha) byte first
+		for(int x = 0; x < 1920; ++x)
 		{
-			buffer[pixel + 0] = (color >> 24);
-			buffer[pixel + 1] = (color >> 16) & 0xFF;
-			buffer[pixel + 2] = (color >> 8) & 0xFF;
-			buffer[pixel + 3] = (color) & 0xFF;
-		}
-		else if (endian == 0)   // Least significant (Blue) byte first
-		{
-			buffer[pixel + 0] = (color) & 0xFF;
-			buffer[pixel + 1] = (color >> 8) & 0xFF;
-			buffer[pixel + 2] = (color >> 16) & 0xFF;
-			buffer[pixel + 3] = (color >> 24);
+			int pixel = (y * line_bytes) + (x * 4);
+	
+			if (endian == 1)        // Most significant (Alpha) byte first
+			{
+				buffer[pixel + 0] = (color >> 24);
+				buffer[pixel + 1] = (color >> 16) & 0xFF;
+				buffer[pixel + 2] = (color >> 8) & 0xFF;
+				buffer[pixel + 3] = (color) & 0xFF;
+			}
+			else if (endian == 0)   // Least significant (Blue) byte first
+			{
+				buffer[pixel + 0] = (color) & 0xFF;
+				buffer[pixel + 1] = (color >> 8) & 0xFF;
+				buffer[pixel + 2] = (color >> 16) & 0xFF;
+				buffer[pixel + 3] = (color >> 24);
+			}
 		}
 	}
 	color = 0xBAD7F2;
