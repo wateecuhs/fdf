@@ -43,11 +43,11 @@ int	main(void)
 	mlx_hook(vars.win, 17, 1L<<0, cross_close, &vars);
 	vars.img = mlx_new_image(vars.mlx, 1920, 1080);
 	buffer = mlx_get_data_addr(vars.img, &pixel_bits, &line_bytes, &endian);
+	/*
 	int color = 0xF2BAC9;
 
 	if (pixel_bits != 32)
 		color = mlx_get_color_value(vars.mlx, color);
-
 	for(int y = 0; y < 1080; ++y)
 	{
 		for(int x = 0; x < 1920; ++x)
@@ -92,7 +92,7 @@ int	main(void)
 				buffer[pixel + 3] = (color >> 24);
 			}
 		}
-	}
+	} */
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 	mlx_loop(vars.mlx);
 	
