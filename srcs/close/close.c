@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 15:37:08 by panger           ###   ########.fr       */
+/*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
+/*   Updated: 2023/12/04 13:23:18 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	read_input(int fd)
+int	cross_close(t_vars *vars)
 {
-	char	*s;
-	char	**args;
-	int		line;
-
-	line = 0;
-	s = get_next_line(fd);
-	while (s != NULL)
-	{
-		
-		s = get_next_line(fd);
-	}
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
 
-int	main(int argc, char **argv)
+int	close_esc(int keycode, t_vars *vars)
 {
-	int	fd;
-
-	if (argc != 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (1);
-	
-	create_window();
+	if (keycode == 65307)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
