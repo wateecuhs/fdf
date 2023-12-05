@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:44:30 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:40:12 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:56:52 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_sqrt(int nb)
 	return (i);
 }
 
+
 int	draw_line(t_vars *vars, int x_start, int y_start, int x_stop, int y_stop)
 {
 	int		pixels;
@@ -48,19 +49,23 @@ int	draw_line(t_vars *vars, int x_start, int y_start, int x_stop, int y_stop)
 	while (pixels)
 	{
 		pixel = ((int)starty * vars->img->line_bytes) + ((int)startx * (vars->img->pixel_bits / 8));
-		if (vars->img->endian == 1)
+		printf("PIXEL CRASHING IT %d\n", pixel);
+		if (pixel >= 0 && pixel < 4829188)
 		{
-			vars->img->buffer[pixel + 0] = (color >> 24);
-			vars->img->buffer[pixel + 1] = (color >> 16) & 0xFF;
-			vars->img->buffer[pixel + 2] = (color >> 8) & 0xFF;
-			vars->img->buffer[pixel + 3] = (color) & 0xFF;
-		}
-		else if (vars->img->endian == 0)
-		{
-			vars->img->buffer[pixel + 0] = (color) & 0xFF;
-			vars->img->buffer[pixel + 1] = (color >> 8) & 0xFF;
-			vars->img->buffer[pixel + 2] = (color >> 16) & 0xFF;
-			vars->img->buffer[pixel + 3] = (color >> 24);
+			if (vars->img->endian == 1)
+			{
+				vars->img->buffer[pixel + 0] = (color >> 24);
+				vars->img->buffer[pixel + 1] = (color >> 16) & 0xFF;
+				vars->img->buffer[pixel + 2] = (color >> 8) & 0xFF;
+				vars->img->buffer[pixel + 3] = (color) & 0xFF;
+			}
+			else if (vars->img->endian == 0)
+			{
+				vars->img->buffer[pixel + 0] = (color) & 0xFF;
+				vars->img->buffer[pixel + 1] = (color >> 8) & 0xFF;
+				vars->img->buffer[pixel + 2] = (color >> 16) & 0xFF;
+				vars->img->buffer[pixel + 3] = (color >> 24);
+			}
 		}
 		startx += deltaX;
 		starty += deltaY;

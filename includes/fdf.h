@@ -6,15 +6,15 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 16:06:28 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 17:59:41 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define HEIGHT 1280
-# define WIDTH	720
+# define HEIGHT 720
+# define WIDTH	1280
 
 #include <mlx.h>
 #include <stdio.h>
@@ -23,6 +23,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
+#include <math.h>
 
 typedef struct	s_img_vars {
 	void	*addr;
@@ -42,6 +43,8 @@ typedef struct	s_map_elem {
 	int			x;
 	int			y;
 	int			z;
+	int			u;
+	int			v;
 	__uint64_t	colors;
 }	t_map_elem;
 
@@ -51,6 +54,10 @@ int			cross_close(t_vars *vars);
 int			close_esc(int keycode, t_vars *vars);
 t_vars		*create_window(t_map_elem ***map);
 int			draw_line(t_vars *vars, int x, int y, int x_stop, int y_stop);
+void		transformations_img(t_map_elem ***map, t_vars *vars);
+void		apply_scale(t_map_elem ***map);
+void		apply_offset(t_map_elem ***map);
+void		apply_isometric(t_map_elem ***map);
 
 char		*get_next_line(int fd);
 int			ft_strchr(const char *s, int c);

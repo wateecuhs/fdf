@@ -15,19 +15,18 @@
 t_vars	*create_window(t_map_elem ***map)
 {
 	t_vars	*vars;
-	(void)map;
 
 	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, HEIGHT, WIDTH, "Hello world!");
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Hello world!");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	mlx_hook(vars->win, 2, 1L<<0, close_esc, vars);
 	mlx_hook(vars->win, 17, 1L<<0, cross_close, vars);
 	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
-	vars->img->addr = mlx_new_image(vars->mlx, HEIGHT, WIDTH);
+	vars->img->addr = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	vars->img->buffer = mlx_get_data_addr(vars->img->addr, &(vars->img->pixel_bits), &(vars->img->line_bytes), &(vars->img->endian));
-	draw_line(vars, 0, 0, HEIGHT, WIDTH);
+	transformations_img(map, vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->addr, 0, 0);
 	mlx_loop(vars->mlx);
 	return (vars);

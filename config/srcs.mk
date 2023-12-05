@@ -5,10 +5,17 @@ SRCS= 			main.c \
 				$(SRCS_UTILS) \
 				$(SRCS_GNL) \
 				$(SRCS_FREE) \
-				draw/draw_line.c
+				$(SRCS_DRAW)
+				
 
 SRCS_WINDOW=	window/create_window.c \
 				window/close.c
+
+SRCS_DRAW=		draw/draw_line.c \
+				draw/transformations.c \
+				draw/scale.c \
+				draw/offset.c \
+				draw/isometric.c
 
 SRCS_PARSING=	parsing/parsing.c
 
