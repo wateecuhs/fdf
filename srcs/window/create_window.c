@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_window.c                                    :+:      :+:    :+:   */
+/*   create_window->c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: panger <panger@student->42->fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 15:17:55 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:15:33 by panger           ###   ########->fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-t_vars	create_window(void)
+t_vars	*create_window(t_map_elem ***map)
 {
-	t_vars	vars;
-	int color = 0xF2BAC9;
+	t_vars	*vars;
+	(void)map;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1280, 720, "Hello world!");
-	if (!(vars.win))
+	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, HEIGHT, WIDTH, "Hello world!");
+	if (!(vars->win))
 		exit(EXIT_FAILURE);
-	mlx_hook(vars.win, 2, 1L<<0, close_esc, &vars);
-	mlx_hook(vars.win, 17, 1L<<0, cross_close, &vars);
-	mlx_pixel_put(vars.mlx, vars.win, 500, 500, color);
-	mlx_loop(vars.mlx);
+	mlx_hook(vars->win, 2, 1L<<0, close_esc, vars);
+	mlx_hook(vars->win, 17, 1L<<0, cross_close, vars);
+	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
+	vars->img->addr = mlx_new_image(vars->mlx, HEIGHT, WIDTH);
+	vars->img->buffer = mlx_get_data_addr(vars->img->addr, &(vars->img->pixel_bits), &(vars->img->line_bytes), &(vars->img->endian));
+	draw_line(vars, 0, 0, HEIGHT, WIDTH);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->addr, 0, 0);
+	mlx_loop(vars->mlx);
 	return (vars);
 }

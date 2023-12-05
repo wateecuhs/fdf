@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Created: 2023/12/05 16:07:26 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 16:08:02 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	main(int argc, char **argv)
+void	transformations_img(t_map_elem ***map, t_vars *vars)
 {
-	t_map_elem ***map;
-
-	if (argc != 2)
-		return (1);
-	map = map_parsing(argv[1]);
-	create_window(map);
+	
 }

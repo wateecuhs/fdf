@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:06:59 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 15:36:09 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:06:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**ft_split(char *s, char *c)
 	{
 		if (in_charset(s[i], c) == 0)
 		{
-			tab[k++] = ft_substr(s, i, next_charset(s, c, i));
+			tab[k++] = ft_substr(s, i, next_charset(s, c, i) - i);
 			if (!tab[k - 1])
 				return (free_tab(tab, k - 1), NULL);
 			i = next_charset(s, c, i);

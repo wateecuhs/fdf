@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Created: 2023/12/05 13:26:39 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 13:29:23 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	main(int argc, char **argv)
+void	error_msg(char *str)
 {
-	t_map_elem ***map;
-
-	if (argc != 2)
-		return (1);
-	map = map_parsing(argv[1]);
-	create_window(map);
+	write(2, "fdf: ", 5);
+	write(2, str, ft_strlen(str));
+	write(2, ": ", 2);
+	write(2, strerror(errno), ft_strlen(strerror(errno)));
+	write(2, "\n", 1);
+	exit(EXIT_FAILURE);
 }

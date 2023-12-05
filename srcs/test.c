@@ -26,7 +26,21 @@ int	close_esc(int keycode, t_vars *vars)
 	return (0);
 }
 
+int	main(void)
+{
+	t_vars	*vars;
 
+	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, 1280, 720, "Hello world!");
+	if (!(vars->win))
+		exit(EXIT_FAILURE);
+	mlx_hook(vars->win, 2, 1L<<0, close_esc, vars);
+	mlx_hook(vars->win, 17, 1L<<0, cross_close, vars);
+	mlx_loop(vars->mlx);
+}
+
+/* 
 int	main(void)
 {
 	t_vars	vars;
@@ -97,3 +111,4 @@ int	main(void)
 	mlx_loop(vars.mlx);
 	
 }
+ */

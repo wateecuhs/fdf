@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   connect_dots.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Created: 2023/12/05 15:51:50 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 16:07:00 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	main(int argc, char **argv)
+int	connect_dots(t_map_elem ***map, t_vars *vars)
 {
-	t_map_elem ***map;
+	int	i;
+	int	j;
 
-	if (argc != 2)
-		return (1);
-	map = map_parsing(argv[1]);
-	create_window(map);
+	i = 0;
 }

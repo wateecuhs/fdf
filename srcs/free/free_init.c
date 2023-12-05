@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Created: 2023/12/05 14:57:03 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 15:08:22 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	main(int argc, char **argv)
+void	free_line(char **str)
 {
-	t_map_elem ***map;
+	unsigned int	i;
 
-	if (argc != 2)
-		return (1);
-	map = map_parsing(argv[1]);
-	create_window(map);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

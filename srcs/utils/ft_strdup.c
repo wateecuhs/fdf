@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 13:23:18 by panger           ###   ########.fr       */
+/*   Created: 2023/10/09 21:36:53 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 13:46:47 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	cross_close(t_vars *vars)
+char	*ft_strdup(const char *s)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+	size_t	srclen;
+	size_t	i;
+	char	*dest;
 
-int	close_esc(int keycode, t_vars *vars)
-{
-	if (keycode == 65307)
+	if (!s)
+		return (NULL);
+	srclen = 0;
+	while (s[srclen])
+		srclen++;
+	i = 0;
+	dest = (char *)malloc((srclen + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	while (i < srclen)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(EXIT_SUCCESS);
+		dest[i] = s[i];
+		i ++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

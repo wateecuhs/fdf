@@ -6,21 +6,11 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:02:44 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 15:21:39 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 13:46:25 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 int	ft_strchr(const char *s, int c)
 {
@@ -65,29 +55,6 @@ char	*ft_strdupset(char const *s, int start, int stop)
 	return (trg);
 }
 
-char	*ft_strdup(const char *s)
-{
-	int		srclen;
-	int		i;
-	char	*dest;
-
-	srclen = 0;
-	if (!s)
-		return (NULL);
-	while (s[srclen])
-		srclen++;
-	i = 0;
-	dest = (char *)malloc((srclen + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	while (i < srclen)
-	{
-		dest[i] = s[i];
-		i ++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 
 char	*ft_stradd(char *s1, char *s2, int size)
 {

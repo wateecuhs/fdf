@@ -6,14 +6,14 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:34:56 by panger            #+#    #+#             */
-/*   Updated: 2023/12/04 15:21:37 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 13:43:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100000
+# define BUFFER_SIZE 1000
 #endif
 
 char	*cut_str(char *str)

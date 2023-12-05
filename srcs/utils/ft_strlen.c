@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Created: 2023/10/09 21:35:53 by panger            #+#    #+#             */
+/*   Updated: 2023/12/05 13:40:16 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *str)
 {
-	t_map_elem ***map;
+	int	i;
 
-	if (argc != 2)
-		return (1);
-	map = map_parsing(argv[1]);
-	create_window(map);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
