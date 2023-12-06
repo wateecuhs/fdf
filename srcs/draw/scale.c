@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:28:51 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 15:03:19 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:55:05 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_scale(t_map_elem ***map)
 			j++;
 		scale = (WIDTH) / (j - 1);
 	}
+	printf("SCALE %d\n", scale);
 	return (scale);
 }
 
@@ -39,7 +40,7 @@ void	apply_scale(t_map_elem ***map)
 {
 	int	i;
 	int	j;
-	int	scale;
+	int scale;
 
 	i = 0;
 	scale = get_scale(map);

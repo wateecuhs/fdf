@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 15:14:29 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:54:30 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ typedef struct	s_map_elem {
 	int			v;
 	__uint64_t	colors;
 }	t_map_elem;
+
+typedef struct	s_coords {
+	int	x;
+	int	y;
+}			t_coords;
 
 void		error_msg(char *str);
 
