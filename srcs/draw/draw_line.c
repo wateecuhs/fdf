@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:44:30 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 18:56:52 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/06 15:15:07 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,48 +28,49 @@ int	ft_sqrt(int nb)
 	return (i);
 }
 
+void	draw_pixel(char *buffer, int pixel, int color, int endian)
+{
+	if (endian == 1)
+	{
+		buffer[pixel + 0] = (color >> 24);
+		buffer[pixel + 1] = (color >> 16) & 0xFF;
+		buffer[pixel + 2] = (color >> 8) & 0xFF;
+		buffer[pixel + 3] = (color) & 0xFF;
+	}
+	else if (endian == 0)
+	{
+		buffer[pixel + 0] = (color) & 0xFF;
+		buffer[pixel + 1] = (color >> 8) & 0xFF;
+		buffer[pixel + 2] = (color >> 16) & 0xFF;
+		buffer[pixel + 3] = (color >> 24);
+	}
+}
 
-int	draw_line(t_vars *vars, int x_start, int y_start, int x_stop, int y_stop)
+void	draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop)
 {
 	int		pixels;
 	double	deltaX;
 	double	deltaY;
-	int 	color = 0xF2BAC9;
 	double	startx;
 	int		pixel;
 	double	starty;
 
-	deltaX = x_stop - x_start;
-	deltaY = y_stop - y_start;
+	deltaX = stop->u - start->u;
+	deltaY = stop->v - start->v;
 	pixels = ft_sqrt((deltaX * deltaX) + (deltaY * deltaY));
 	deltaX /= pixels;
 	deltaY /= pixels;
-	startx = x_start;
-	starty = y_start;
+	startx = start->u;
+	starty = start->v;
 	while (pixels)
 	{
 		pixel = ((int)starty * vars->img->line_bytes) + ((int)startx * (vars->img->pixel_bits / 8));
-		printf("PIXEL CRASHING IT %d\n", pixel);
-		if (pixel >= 0 && pixel < 4829188)
+		if (pixel >= 0 && pixel < 6960200)
 		{
-			if (vars->img->endian == 1)
-			{
-				vars->img->buffer[pixel + 0] = (color >> 24);
-				vars->img->buffer[pixel + 1] = (color >> 16) & 0xFF;
-				vars->img->buffer[pixel + 2] = (color >> 8) & 0xFF;
-				vars->img->buffer[pixel + 3] = (color) & 0xFF;
-			}
-			else if (vars->img->endian == 0)
-			{
-				vars->img->buffer[pixel + 0] = (color) & 0xFF;
-				vars->img->buffer[pixel + 1] = (color >> 8) & 0xFF;
-				vars->img->buffer[pixel + 2] = (color >> 16) & 0xFF;
-				vars->img->buffer[pixel + 3] = (color >> 24);
-			}
+			draw_pixel(vars->img->buffer, pixel, stop->colors, vars->img->endian);
 		}
 		startx += deltaX;
 		starty += deltaY;
 		pixels--;
 	}
-	return (0);
 }

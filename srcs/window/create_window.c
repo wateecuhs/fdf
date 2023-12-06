@@ -18,7 +18,7 @@ t_vars	*create_window(t_map_elem ***map)
 
 	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "Hello world!");
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "fdf - panger");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	mlx_hook(vars->win, 2, 1L<<0, close_esc, vars);

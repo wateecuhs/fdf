@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:25:28 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 17:20:35 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/06 12:54:37 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ t_map_elem	*make_values(char ***tab, int i, int j)
 	char		**colors;
 
 	tmp = (t_map_elem *)malloc(sizeof(t_map_elem) * 1);
-	tmp->x = i;
-	tmp->y = j;
+	tmp->x = j;
+	tmp->y = i;
 	tmp->z = ft_atoi(tab[i][j]);
 	colors = ft_split(tab[i][j], ",");
 	if (!colors)
