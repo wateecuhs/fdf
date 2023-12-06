@@ -16,7 +16,7 @@ SRCS_DRAW=		draw/draw_line.c \
 				draw/scale.c \
 				draw/offset.c \
 				draw/isometric.c \
-				draw/resize.c
+				draw/resize_wip.c
 
 SRCS_PARSING=	parsing/parsing.c
 

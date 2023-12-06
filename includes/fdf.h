@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 16:54:30 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:10:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_img_vars {
 	int		line_bytes;
 	int		endian;
 	char	*buffer;
+	float	z_scale_quotient;
 }			t_img_vars;
 
 typedef struct	s_vars {
@@ -53,17 +54,22 @@ typedef struct	s_coords {
 	int	y;
 }			t_coords;
 
+typedef struct	s_param {
+	t_vars		*vars;
+	t_map_elem	***map;
+}			t_param;
+
 void		error_msg(char *str);
 
 int			cross_close(t_vars *vars);
-int			close_esc(int keycode, t_vars *vars);
+int			key_hook(int keycode, t_param *param);
 t_vars		*create_window(t_map_elem ***map);
 void		draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop);
 void		transformations_img(t_map_elem ***map, t_vars *vars);
-void		apply_scale(t_map_elem ***map);
+void		apply_scale(t_map_elem ***map, float z_scale_quotient);
 void		apply_offset(t_map_elem ***map);
 void		apply_isometric(t_map_elem ***map);
-void	ft_resize(t_map_elem ***map, t_vars *vars);
+void		ft_resize(t_map_elem ***map, t_vars *vars);
 
 char		*get_next_line(int fd);
 int			ft_strchr(const char *s, int c);
