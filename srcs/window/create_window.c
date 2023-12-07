@@ -32,7 +32,10 @@ t_vars	*create_window(t_map_elem ***map)
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
-	vars->img->z_scale_quotient = 0.25;
+	vars->mods = (t_mods *)malloc(sizeof(t_mods));
+	vars->mods->z_coefficient = 0.25;
+	vars->mods->x_angle = 0;
+	vars->mods->resize = 1;
 	create_image(map, vars);
 	param->map = map;
 	param->vars = vars;

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 13:44:57 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:20:05 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	key_hook(int keycode, t_param *param)
 		mlx_destroy_window(param->vars->mlx, param->vars->win);
 		exit(EXIT_SUCCESS);
 	}
+	param->vars->mods->resize == 0;
 	if (keycode == 122)
 	{
-		if (param->vars->img->z_scale_quotient < 1)
+		if (param->vars->mods->z_coefficient < 1)
 		{
-			param->vars->img->z_scale_quotient += 0.10;
+			param->vars->mods->z_coefficient += 0.10;
 			blackout_screen(param->vars);
 			transformations_img(param->map, param->vars);
 			mlx_put_image_to_window(param->vars->mlx, param->vars->win, param->vars->img->addr, 0, 0);
@@ -40,9 +41,29 @@ int	key_hook(int keycode, t_param *param)
 	}
 	else if (keycode == 120)
 	{
-		if (param->vars->img->z_scale_quotient > 0.1)
+		if (param->vars->mods->z_coefficient > 0.1)
 		{
-		param->vars->img->z_scale_quotient -= 0.10;
+		param->vars->mods->z_coefficient -= 0.10;
+		blackout_screen(param->vars);
+		transformations_img(param->map, param->vars);
+		mlx_put_image_to_window(param->vars->mlx, param->vars->win, param->vars->img->addr, 0, 0);
+		}
+	}
+	else if (keycode == 65361)
+	{
+		if (param->vars->mods->x_angle >= 10)
+		{
+		param->vars->mods->x_angle -= 10;
+		blackout_screen(param->vars);
+		transformations_img(param->map, param->vars);
+		mlx_put_image_to_window(param->vars->mlx, param->vars->win, param->vars->img->addr, 0, 0);
+		}
+	}
+	else if (keycode == 65363)
+	{
+		if (param->vars->mods->x_angle <= 350)
+		{
+		param->vars->mods->x_angle += 10;
 		blackout_screen(param->vars);
 		transformations_img(param->map, param->vars);
 		mlx_put_image_to_window(param->vars->mlx, param->vars->win, param->vars->img->addr, 0, 0);

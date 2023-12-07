@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 14:37:32 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 17:20:29 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,19 @@ typedef struct	s_img_vars {
 	float	z_scale_quotient;
 }			t_img_vars;
 
+typedef struct	s_mods {
+	float	z_coefficient;
+	int		x_angle;
+	int		y_angle;
+	int		z_angle;
+	int		resize;
+}			t_mods;
+
 typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
 	t_img_vars	*img;
+	t_mods		*mods;
 }				t_vars;
 
 typedef struct	s_map_elem {
@@ -55,7 +64,7 @@ typedef struct	s_coords {
 	int	y;
 }			t_coords;
 
-typedef struct s_colors {
+typedef struct	s_colors {
 	uint8_t	a;
 	uint8_t	r;
 	uint8_t	g;
@@ -88,7 +97,7 @@ void		draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop);
 void		transformations_img(t_map_elem ***map, t_vars *vars);
 void		apply_scale(t_map_elem ***map, float z_scale_quotient);
 void		apply_offset(t_map_elem ***map);
-void		apply_isometric(t_map_elem ***map, float z_quotient);
+void		apply_isometric(t_map_elem ***map, t_mods *mods);
 void		ft_resize(t_map_elem ***map, t_vars *vars);
 t_f_coords	assign_f_xy(float x, float y);
 t_coords	assign_xy(int x, int y);
@@ -96,7 +105,6 @@ t_colors	assign_color(__uint32_t color);
 void		create_image(t_map_elem ***map, t_vars *vars);
 void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 int			get_scale(t_map_elem ***map);
-
 char		*get_next_line(int fd);
 int			ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *s);
