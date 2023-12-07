@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:44:30 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 16:55:22 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 14:06:29 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,70 @@ int	ft_sqrt(int nb)
 	return (i);
 }
 
-void	draw_pixel(char *buffer, int pixel, int color, int endian)
+void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
 {
 	if (endian == 1)
 	{
-		buffer[pixel + 0] = (color >> 24);
-		buffer[pixel + 1] = (color >> 16) & 0xFF;
-		buffer[pixel + 2] = (color >> 8) & 0xFF;
-		buffer[pixel + 3] = (color) & 0xFF;
+		buffer[pixel + 0] = color.a;
+		buffer[pixel + 1] = color.r;
+		buffer[pixel + 2] = color.g;
+		buffer[pixel + 3] = color.b;
 	}
 	else if (endian == 0)
 	{
-		buffer[pixel + 0] = (color) & 0xFF;
-		buffer[pixel + 1] = (color >> 8) & 0xFF;
-		buffer[pixel + 2] = (color >> 16) & 0xFF;
-		buffer[pixel + 3] = (color >> 24);
+		buffer[pixel + 0] = color.b;
+		buffer[pixel + 1] = color.g;
+		buffer[pixel + 2] = color.r;
+		buffer[pixel + 3] = color.a;
 	}
+}
+
+t_colors_delta	get_color_delta(t_colors start, t_colors stop, int pixels)
+{
+	t_colors_delta	ret;
+
+	ret.a = (float)(stop.a - start.a) / (float)pixels;
+	ret.r = (float)(stop.r - start.r) / (float)pixels;
+	ret.g = (float)(stop.g - start.g) / (float)pixels;
+	ret.b = (float)(stop.b - start.b) / (float)pixels;
+	return (ret);
+}
+
+t_colors	add_delta(t_colors color, t_colors_delta delta, int i)
+{
+	t_colors	ret;
+	
+	ret.a = color.a + (delta.a * i);
+	ret.r = color.r + (delta.r * i);
+	ret.g = color.g + (delta.g * i);
+	ret.b = color.b + (delta.b * i);
+	return (ret);
 }
 
 void	draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop)
 {
-	int		pixels;
-	double	deltaX;
-	double	deltaY;
-	double	startx;
-	int		pixel;
-	double	starty;
+	int				pixels;
+	int				i;
+	t_f_coords		start_coords;
+	t_f_coords		delta;
+	t_colors		colors;
+	t_colors		pixel_color;
+	t_colors_delta	colors_delta;
+	int				pixel;
 
-	deltaX = stop->u - start->u;
-	deltaY = stop->v - start->v;
-	pixels = ft_sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	deltaX /= pixels;
-	deltaY /= pixels;
-	startx = start->u;
-	starty = start->v;
-	while (pixels)
+	i = 0;
+	delta = assign_f_xy(stop->u - start->u, stop->v - start->v);
+	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
+	delta = assign_f_xy(delta.x / pixels, delta.y / pixels);
+	colors = assign_color(start->colors);
+	colors_delta = get_color_delta(colors, assign_color(stop->colors), pixels);
+	start_coords = assign_f_xy(start->u, start->v);
+	while (pixels--)
 	{
-		pixel = ((int)starty * vars->img->line_bytes) + ((int)startx * (vars->img->pixel_bits / 8));
-		if (pixel >= 0 && pixel < 6960200)
-		{
-			draw_pixel(vars->img->buffer, pixel, stop->colors, vars->img->endian);
-		}
-		startx += deltaX;
-		starty += deltaY;
-		pixels--;
+		pixel_color = add_delta(colors, colors_delta, i);
+		pixel = ((int)start_coords.y * vars->img->line_bytes) + ((int)start_coords.x * (vars->img->pixel_bits / 8));
+		draw_pixel(vars->img->buffer, pixel, pixel_color, vars->img->endian);
+		start_coords = assign_f_xy(start_coords.x + delta.x, start_coords.y + delta.y);
+		i++;
 	}
 }

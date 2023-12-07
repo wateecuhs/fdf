@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 18:10:12 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 14:00:20 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <string.h>
 #include <errno.h>
 #include <math.h>
+#include <stdint.h>
 
 typedef struct	s_img_vars {
 	void	*addr;
@@ -46,13 +47,32 @@ typedef struct	s_map_elem {
 	int			z;
 	int			u;
 	int			v;
-	__uint64_t	colors;
+	__uint32_t	colors;
 }	t_map_elem;
 
 typedef struct	s_coords {
 	int	x;
 	int	y;
 }			t_coords;
+
+typedef struct s_colors {
+	uint8_t	a;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}			t_colors;
+
+typedef struct s_colors_delta {
+	float	a;
+	float	r;
+	float	g;
+	float	b;
+}			t_colors_delta;
+
+typedef struct	s_f_coords {
+	float	x;
+	float	y;
+}			t_f_coords;
 
 typedef struct	s_param {
 	t_vars		*vars;
@@ -70,6 +90,11 @@ void		apply_scale(t_map_elem ***map, float z_scale_quotient);
 void		apply_offset(t_map_elem ***map);
 void		apply_isometric(t_map_elem ***map);
 void		ft_resize(t_map_elem ***map, t_vars *vars);
+t_f_coords	assign_f_xy(float x, float y);
+t_coords	assign_xy(int x, int y);
+t_colors	assign_color(__uint32_t color);
+void		create_image(t_map_elem ***map, t_vars *vars);
+void	draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 
 char		*get_next_line(int fd);
 int			ft_strchr(const char *s, int c);
@@ -85,9 +110,10 @@ size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *s);
 char		***str_to_tab(char *map_str);
 int			ft_atoi(const char *nptr);
-__uint64_t	ft_atoi_colors(const char *nptr);
+uint32_t	ft_atoi_colors(const char *nptr);
 void		free_line(char **str);
 t_map_elem	***map_parsing(char *path);
 t_map_elem	***tab_to_map(char ***tab, int nb_lines, int line_len);
+void		blackout_screen(t_vars *vars);
 
 #endif

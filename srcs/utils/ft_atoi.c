@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:42:05 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 11:14:45 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 12:23:32 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	check_base(char c)
 
 	i = 0;
 	base = "0123456798abcdef";
+	if (c >= 'A'  && c <= 'Z')
+		c += 32;
 	while (base[i])
 	{
 		if (c == base[i])
@@ -52,14 +54,12 @@ static int	check_base(char c)
 	return (-1);
 }
 
-__uint64_t	ft_atoi_colors(const char *nptr)
+uint32_t	ft_atoi_colors(const char *nptr)
 {
 	int			i;
-	__uint64_t	tot;
-	char		*base;
+	uint32_t	tot;
 
 	i = 0;
-	base = "0123456798abcdef";
 	tot = 0;
 	if (nptr[i]  == '0' && nptr[i + 1] == 'x')
 		i += 2;

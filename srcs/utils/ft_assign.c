@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric.c                                        :+:      :+:    :+:   */
+/*   ft_assign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 17:35:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 14:00:28 by panger           ###   ########.fr       */
+/*   Created: 2023/12/07 10:49:48 by panger            #+#    #+#             */
+/*   Updated: 2023/12/07 12:40:05 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	apply_isometric(t_map_elem ***map)
+t_coords	assign_xy(int x, int y)
 {
-	int	i;
-	int	j;
-	int	max;
-	int x;
-	int y;
-	int z;
+	t_coords	ret;
 
-	i = 0;
-	max = -1;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			x = map[i][j]->x;
-			y = map[i][j]->y;
-			z = map[i][j]->z;
-			map[i][j]->u = (1/sqrt(2)) * x + (1/sqrt(2)) * y;
-			map[i][j]->v = -(1/sqrt(6)) * x + (1/sqrt(6)) * y - (2/sqrt(6)) * z;
-			j++;
-		}
-		i++;
-	}
+	ret.x = x;
+	ret.y = y;
+	return (ret);
+}
+
+t_f_coords	assign_f_xy(float x, float y)
+{
+	t_f_coords	ret;
+
+	ret.x = x;
+	ret.y = y;
+	return (ret);
+}
+
+t_colors	assign_color(__uint32_t color)
+{
+	t_colors	ret;
+
+	ret.a = color >> 24;
+	ret.r = color >> 16;
+	ret.g = color >> 8;
+	ret.b = color >> 0;
+
+	return (ret);
 }

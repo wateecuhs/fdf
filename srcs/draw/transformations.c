@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:07:26 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 18:01:26 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 13:29:10 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	transformations_img(t_map_elem ***map, t_vars *vars)
 	int	j;
 
 	apply_scale(map, vars->img->z_scale_quotient);
-	apply_offset(map);
 	apply_isometric(map);
 	ft_resize(map, vars);
 	i = 0;

@@ -14,10 +14,8 @@
 
 void	create_image(t_map_elem ***map, t_vars *vars)
 {
-	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
 	vars->img->addr = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	vars->img->buffer = mlx_get_data_addr(vars->img->addr, &(vars->img->pixel_bits), &(vars->img->line_bytes), &(vars->img->endian));
-	vars->img->z_scale_quotient = 0.25;
 	transformations_img(map, vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->addr, 0, 0);
 }
@@ -33,6 +31,8 @@ t_vars	*create_window(t_map_elem ***map)
 	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "fdf - panger");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
+	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
+	vars->img->z_scale_quotient = 0.25;
 	create_image(map, vars);
 	param->map = map;
 	param->vars = vars;
