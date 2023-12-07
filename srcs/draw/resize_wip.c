@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:29:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/06 18:04:35 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/07 14:34:03 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ float	get_scale1(int len_dest, int len_src)
 	float	scale;
 
 	scale = (float)len_src / (float)len_dest;
-	printf("%f\n", scale);
 	return (scale);
 }
 
