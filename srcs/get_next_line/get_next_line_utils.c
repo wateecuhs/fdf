@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:02:44 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 13:46:25 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:21:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_strdupset(char const *s, int start, int stop)
 	trg[i] = '\0';
 	return (trg);
 }
-
 
 char	*ft_stradd(char *s1, char *s2, int size)
 {

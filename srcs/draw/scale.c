@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:28:51 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 14:47:16 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:09:47 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	apply_scale(t_map_elem ***map, float z_scale_quotient)
 {
 	int	i;
 	int	j;
-	int scale;
+	int	scale;
 
 	i = 0;
 	scale = get_scale(map);

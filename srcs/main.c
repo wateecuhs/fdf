@@ -6,16 +6,15 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:49:34 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:24:48 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
 int	main(int argc, char **argv)
 {
-	t_map_elem ***map;
+	t_map_elem	***map;
 
 	if (argc != 2)
 		return (1);

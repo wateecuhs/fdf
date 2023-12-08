@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_window->c                                    :+:      :+:    :+:   */
+/*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student->42->fr>              +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 15:15:33 by panger           ###   ########->fr       */
+/*   Updated: 2023/12/08 17:24:20 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void set_mods(t_map_elem ***map, t_mods *mods)
+void	set_mods(t_map_elem ***map, t_mods *mods)
 {
 	mods->z_coefficient = 0.25;
 	mods->x_angle = 0;
@@ -27,7 +27,10 @@ void set_mods(t_map_elem ***map, t_mods *mods)
 void	create_image(t_map_elem ***map, t_vars *vars)
 {
 	vars->img->addr = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-	vars->img->buffer = mlx_get_data_addr(vars->img->addr, &(vars->img->pixel_bits), &(vars->img->line_bytes), &(vars->img->endian));
+	vars->img->buffer = mlx_get_data_addr(vars->img->addr,
+			&(vars->img->pixel_bits),
+			&(vars->img->line_bytes),
+			&(vars->img->endian));
 	transformations_img(map, vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->addr, 0, 0);
 }
@@ -40,7 +43,7 @@ t_vars	*create_window(t_map_elem ***map)
 	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
 	param = (t_param *)malloc(sizeof(t_param) * 1);
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, r_WIDTH, HEIGHT, "fdf - panger");
+	vars->win = mlx_new_window(vars->mlx, R_WIDTH, HEIGHT, "fdf - panger");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
@@ -50,8 +53,8 @@ t_vars	*create_window(t_map_elem ***map)
 	create_image(map, vars);
 	param->map = map;
 	param->vars = vars;
-	mlx_hook(vars->win, 17, 1L<<0, cross_close, vars);
-	mlx_hook(vars->win, 2, 1L<<0, key_hook, param);
+	mlx_hook(vars->win, 17, 1L << 0, cross_close, vars);
+	mlx_hook(vars->win, 2, 1L << 0, key_hook, param);
 	mlx_loop(vars->mlx);
 	return (vars);
 }

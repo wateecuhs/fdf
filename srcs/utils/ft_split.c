@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:06:59 by panger            #+#    #+#             */
-/*   Updated: 2023/12/05 14:06:54 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:20:55 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_tab(char **tab, int k)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < k)

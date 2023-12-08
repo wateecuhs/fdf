@@ -9,7 +9,8 @@ SRCS= 			main.c \
 				
 
 SRCS_WINDOW=	window/create_window.c \
-				window/close.c
+				window/hooks.c \
+				window/keys_parsing.c
 
 SRCS_DRAW=		draw/draw_line.c \
 				draw/transformations.c \

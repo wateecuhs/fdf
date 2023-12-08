@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 10:49:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 12:40:05 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:10:24 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ t_colors	assign_color(__uint32_t color)
 	ret.r = color >> 16;
 	ret.g = color >> 8;
 	ret.b = color >> 0;
-
 	return (ret);
 }

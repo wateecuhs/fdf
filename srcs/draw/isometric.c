@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:35:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 14:56:15 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:22:22 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	offset_map(t_map_elem ***map)
 		l = 0;
 		while (map[k][l])
 		{
-			map[k][l]->x -= ((j - 1)/2);
-			map[k][l]->y -= ((i - 1)/2);
+			map[k][l]->x -= ((j - 1) / 2);
+			map[k][l]->y -= ((i - 1) / 2);
 			l++;
 		}
 		k++;
@@ -43,10 +43,9 @@ void	offset_map(t_map_elem ***map)
 
 t_coords	offset_map_back(t_map_elem ***map)
 {
-	t_coords ret;
-
-	int	i;
-	int	j;
+	t_coords	ret;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (map[i])
@@ -56,15 +55,15 @@ t_coords	offset_map_back(t_map_elem ***map)
 			j++;
 		i++;
 	}
-	ret.x = ((j - 1)/2);
-	ret.y = ((i - 1)/2);
+	ret.x = ((j - 1) / 2);
+	ret.y = ((i - 1) / 2);
 	return (ret);
 }
 
 void	apply_isometric(t_map_elem ***map, t_mods *mods)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 	t_coords	offset;
 	t_coords	uv;
 

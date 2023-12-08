@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:29:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 14:46:36 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:09:19 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_coords	get_offset(t_map_elem ***map, t_mods *mods)
 {
-	t_coords ret;
+	t_coords	ret;
 	t_map_elem	*middle;
 
 	middle = find_center(map);

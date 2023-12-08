@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:25:28 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 12:22:53 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:10:19 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	***str_to_tab(char *map_str)
 
 t_map_elem	*make_values(char ***tab, int i, int j)
 {
-	t_map_elem *tmp;
+	t_map_elem	*tmp;
 	char		**colors;
 
 	tmp = (t_map_elem *)malloc(sizeof(t_map_elem) * 1);
