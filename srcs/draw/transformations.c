@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:07:26 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 18:07:32 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:30:44 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	transformations_img(t_map_elem ***map, t_vars *vars)
 		while (map[i][j])
 		{
 			if (map[i][j + 1])
-				draw_line(vars, map[i][j], map[i][j + 1]);
+				draw_line(vars, map[i][j], map[i][j + 1], 0);
 			if (map[i + 1])
 			{
-				draw_line(vars, map[i][j], map[i + 1][j]);
+				draw_line(vars, map[i][j], map[i + 1][j], 0);
 				if (map[i + 1][j + 1])
-					draw_line(vars, map[i][j], map[i + 1][j + 1]);
+					draw_line(vars, map[i][j], map[i + 1][j + 1], 0);
 			}
 			j++;
 		}

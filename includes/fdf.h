@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:52:29 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:30:31 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <math.h>
 # include <stdint.h>
 
-typedef struct s_img_vars {
+typedef struct s_img_vars
+{
 	void	*addr;
 	int		pixel_bits;
 	int		line_bytes;
@@ -37,14 +38,16 @@ typedef struct s_img_vars {
 	float	z_scale_quotient;
 }			t_img_vars;
 
-typedef struct color_preset {
+typedef struct color_preset
+{
 	__uint32_t	color1;
 	__uint32_t	color2;
 	__uint32_t	color3;
 	__uint32_t	color4;
 }			t_color_preset;
 
-typedef struct s_mods {
+typedef struct s_mods
+{
 	float			z_coefficient;
 	int				x_angle;
 	int				y_angle;
@@ -55,14 +58,16 @@ typedef struct s_mods {
 	t_color_preset	*color_preset;
 }			t_mods;
 
-typedef struct s_vars {
+typedef struct s_vars
+{
 	void		*mlx;
 	void		*win;
 	t_img_vars	*img;
 	t_mods		*mods;
 }				t_vars;
 
-typedef struct s_map_elem {
+typedef struct s_map_elem
+{
 	int			x;
 	int			y;
 	int			z;
@@ -71,31 +76,36 @@ typedef struct s_map_elem {
 	__uint32_t	colors;
 }	t_map_elem;
 
-typedef struct s_coords {
+typedef struct s_coords
+{
 	int	x;
 	int	y;
 }			t_coords;
 
-typedef struct s_colors {
+typedef struct s_colors
+{
 	uint8_t	a;
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
 }			t_colors;
 
-typedef struct s_colors_delta {
+typedef struct s_colors_delta
+{
 	float	a;
 	float	r;
 	float	g;
 	float	b;
 }			t_colors_delta;
 
-typedef struct s_f_coords {
+typedef struct s_f_coords
+{
 	float	x;
 	float	y;
 }			t_f_coords;
 
-typedef struct s_param {
+typedef struct s_param
+{
 	t_vars		*vars;
 	t_map_elem	***map;
 }			t_param;
@@ -104,7 +114,7 @@ void			error_msg(char *str);
 int				cross_close(t_vars *vars);
 int				key_hook(int keycode, t_param *param);
 t_vars			*create_window(t_map_elem ***map);
-void			draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop);
+void			draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop, int i);
 void			transformations_img(t_map_elem ***map, t_vars *vars);
 void			apply_scale(t_map_elem ***map, float z_scale_quotient);
 void			apply_offset(t_map_elem ***map, t_coords offset);

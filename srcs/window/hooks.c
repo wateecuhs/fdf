@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:20:28 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:16:17 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	cross_close(t_vars *vars)
 void	parse_keybind3(int keycode, t_param *param)
 {
 	if (keycode == 65361)
-		param->vars->mods->offset_u -= 25;
-	if (keycode == 65363)
 		param->vars->mods->offset_u += 25;
+	if (keycode == 65363)
+		param->vars->mods->offset_u -= 25;
 	if (keycode == 65362)
-		param->vars->mods->offset_v -= 25;
-	if (keycode == 65364)
 		param->vars->mods->offset_v += 25;
+	if (keycode == 65364)
+		param->vars->mods->offset_v -= 25;
 	blackout_screen(param->vars);
 	transformations_img(param->map, param->vars);
 	mlx_put_image_to_window(param->vars->mlx,
