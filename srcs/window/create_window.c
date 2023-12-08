@@ -12,6 +12,18 @@
 
 #include "fdf.h"
 
+void set_mods(t_map_elem ***map, t_mods *mods)
+{
+	mods->z_coefficient = 0.25;
+	mods->x_angle = 0;
+	mods->y_angle = 0;
+	mods->z_angle = 0;
+	mods->offset_v = 0;
+	mods->offset_u = 0;
+	mods->color_preset = NULL;
+	mods->scale = get_scale(map);
+}
+
 void	create_image(t_map_elem ***map, t_vars *vars)
 {
 	vars->img->addr = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
@@ -28,14 +40,13 @@ t_vars	*create_window(t_map_elem ***map)
 	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
 	param = (t_param *)malloc(sizeof(t_param) * 1);
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "fdf - panger");
+	vars->win = mlx_new_window(vars->mlx, r_WIDTH, HEIGHT, "fdf - panger");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
 	vars->mods = (t_mods *)malloc(sizeof(t_mods));
-	vars->mods->z_coefficient = 0.25;
-	vars->mods->x_angle = 0;
-	vars->mods->resize = 1;
+	set_mods(map, vars->mods);
+	put_cmds_txt(vars);
 	create_image(map, vars);
 	param->map = map;
 	param->vars = vars;

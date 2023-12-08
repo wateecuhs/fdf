@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blackout.c                                         :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 13:36:01 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 10:20:20 by panger           ###   ########.fr       */
+/*   Created: 2023/12/08 13:13:36 by panger            #+#    #+#             */
+/*   Updated: 2023/12/08 16:21:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	blackout_screen(t_vars *vars)
+void	set_theme_1(t_mods *mods)
 {
-	int			pixel;
-	int			pixelx;
-	int			pixely;
-	t_colors	colors;
-
-	pixel = 0;
-	colors = assign_color(0x000000);
-	pixely = 0;
-	while (pixely <= 1200)
-	{
-		pixelx = 0;
-		while (pixelx <= 1200)
-		{
-			pixel = pixely * vars->img->line_bytes + pixelx * (vars->img->pixel_bits / 8);
-			draw_pixel(vars->img->buffer, pixel, colors, vars->img->endian);
-			pixelx++;
-		}
-		pixely++;
-	}
+	mods->color_preset->color1 = 0x8d5203;
+	mods->color_preset->color2 = 0xe1c080;
+	mods->color_preset->color3 = 0xc6eae6;
+	mods->color_preset->color4 = 0x02655f;
 }
- 

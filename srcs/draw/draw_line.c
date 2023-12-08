@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:44:30 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 14:06:29 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 14:07:34 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop)
 	{
 		pixel_color = add_delta(colors, colors_delta, i);
 		pixel = ((int)start_coords.y * vars->img->line_bytes) + ((int)start_coords.x * (vars->img->pixel_bits / 8));
-		draw_pixel(vars->img->buffer, pixel, pixel_color, vars->img->endian);
+		if (start_coords.y > 0 && start_coords.y < HEIGHT && start_coords.x > 0 && start_coords.x < WIDTH)
+			draw_pixel(vars->img->buffer, pixel, pixel_color, vars->img->endian);
 		start_coords = assign_f_xy(start_coords.x + delta.x, start_coords.y + delta.y);
 		i++;
 	}

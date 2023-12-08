@@ -6,15 +6,17 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 17:20:29 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:19:39 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define HEIGHT 1200
-# define WIDTH	1200
+# define HEIGHT 	1200
+# define WIDTH		1200
+# define r_WIDTH	1600
+# define M_PI		3.14159265358979323846
 
 #include <mlx.h>
 #include <stdio.h>
@@ -35,12 +37,22 @@ typedef struct	s_img_vars {
 	float	z_scale_quotient;
 }			t_img_vars;
 
+typedef struct	color_preset {
+	__uint32_t	color1;
+	__uint32_t	color2;
+	__uint32_t	color3;
+	__uint32_t	color4;
+}			t_color_preset;
+
 typedef struct	s_mods {
 	float	z_coefficient;
 	int		x_angle;
 	int		y_angle;
 	int		z_angle;
-	int		resize;
+	int		offset_u;
+	int		offset_v;
+	float	scale;
+	t_color_preset	*color_preset;
 }			t_mods;
 
 typedef struct	s_vars {
@@ -96,7 +108,7 @@ t_vars		*create_window(t_map_elem ***map);
 void		draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop);
 void		transformations_img(t_map_elem ***map, t_vars *vars);
 void		apply_scale(t_map_elem ***map, float z_scale_quotient);
-void		apply_offset(t_map_elem ***map);
+void		apply_offset(t_map_elem ***map, t_coords offset);
 void		apply_isometric(t_map_elem ***map, t_mods *mods);
 void		ft_resize(t_map_elem ***map, t_vars *vars);
 t_f_coords	assign_f_xy(float x, float y);
@@ -124,5 +136,9 @@ void		free_line(char **str);
 t_map_elem	***map_parsing(char *path);
 t_map_elem	***tab_to_map(char ***tab, int nb_lines, int line_len);
 void		blackout_screen(t_vars *vars);
+void		put_cmds_txt(t_vars *vars);
+t_map_elem	*find_center(t_map_elem ***map);
+t_coords	apply_mods(t_map_elem map, t_mods *mods, t_coords offset);
+void 		set_mods(t_map_elem ***map, t_mods *mods);
 
 #endif

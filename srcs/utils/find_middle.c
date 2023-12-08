@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blackout.c                                         :+:      :+:    :+:   */
+/*   find_middle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 13:36:01 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 10:20:20 by panger           ###   ########.fr       */
+/*   Created: 2023/12/08 13:15:49 by panger            #+#    #+#             */
+/*   Updated: 2023/12/08 16:18:25 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	blackout_screen(t_vars *vars)
+t_map_elem	*find_center(t_map_elem ***map)
 {
-	int			pixel;
-	int			pixelx;
-	int			pixely;
-	t_colors	colors;
+	int	i;
+	int	j;
 
-	pixel = 0;
-	colors = assign_color(0x000000);
-	pixely = 0;
-	while (pixely <= 1200)
-	{
-		pixelx = 0;
-		while (pixelx <= 1200)
-		{
-			pixel = pixely * vars->img->line_bytes + pixelx * (vars->img->pixel_bits / 8);
-			draw_pixel(vars->img->buffer, pixel, colors, vars->img->endian);
-			pixelx++;
-		}
-		pixely++;
-	}
+	i = 0;
+	while (map[i])
+		i++;
+	j = 0;
+	while (map[0][j])
+		j++;
+	return (map[(i - 1) / 2][(j - 1) / 2]);
 }
- 

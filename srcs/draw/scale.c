@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:28:51 by panger            #+#    #+#             */
-/*   Updated: 2023/12/07 14:36:11 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 14:47:16 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	apply_scale(t_map_elem ***map, float z_scale_quotient)
 
 	i = 0;
 	scale = get_scale(map);
-	printf("multiplying z by %d\n", scale * z_scale_quotient);
 	while (map[i])
 	{
 		j = 0;

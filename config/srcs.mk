@@ -14,10 +14,12 @@ SRCS_WINDOW=	window/create_window.c \
 SRCS_DRAW=		draw/draw_line.c \
 				draw/transformations.c \
 				draw/scale.c \
-				draw/offset.c \
 				draw/isometric.c \
 				draw/resize_wip.c \
-				draw/blackout.c
+				draw/blackout.c \
+				draw/commands_text.c \
+				draw/mods.c \
+				draw/colors.c
 
 SRCS_PARSING=	parsing/parsing.c
 
@@ -32,7 +34,8 @@ SRCS_UTILS=		utils/ft_split.c \
 				utils/ft_strlen.c \
 				utils/ft_strdup.c \
 				utils/ft_atoi.c \
-				utils/ft_assign.c
+				utils/ft_assign.c \
+				utils/find_middle.c
 
 SRCS_FREE=		free/free_init.c
 
