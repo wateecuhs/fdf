@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 21:30:31 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/08 22:10:58 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ void			set_mods(t_map_elem ***map, t_mods *mods);
 t_color_preset	set_theme_1(void);
 void			parse_keybind1(int keycode, t_param *param);
 void			parse_keybind2(int keycode, t_param *param);
+t_colors		get_gradient(t_colors start, t_colors stop, int distance);
 
 #endif

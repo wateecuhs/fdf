@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 22:14:59 by panger           ###   ########.fr       */
+/*   Created: 2023/12/08 22:07:43 by panger            #+#    #+#             */
+/*   Updated: 2023/12/08 22:10:44 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
+t_colors	get_gradient(t_colors start, t_colors stop, int distance)
 {
-	t_map_elem	***map;
+	t_colors	ret;
 
-	if (argc != 2)
-	{
-		write(2, "Wrong number of arguments.", 27);
-		return (1);
-	}
-	map = map_parsing(argv[1]);
-	create_window(map);
+	ret.a = start.a + ((stop.a - start.a)/ 100 * distance);
+	ret.r = start.r + ((stop.r - start.r)/ 100 * distance);
+	ret.g = start.g + ((stop.g - start.g)/ 100 * distance);
+	ret.b = start.b + ((stop.b - start.b)/ 100 * distance);
+	return (ret);
 }

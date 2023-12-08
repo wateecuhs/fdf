@@ -18,5 +18,6 @@ implement gradient
 -changing z scale
 ^done
 find the best way to do rotations (destroy current img and make a new one ? wipe out current img and draw over it ?)
-^trying wipeout of current img and redrawing
+^done
 implement auto coloring if no colors provided. Colors would be based on Z value and multiple sets of colors available (would be swappable using keys)
+^on the way
