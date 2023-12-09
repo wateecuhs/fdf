@@ -20,7 +20,9 @@ SRCS_DRAW=		draw/draw_line.c \
 				draw/blackout.c \
 				draw/commands_text.c \
 				draw/mods.c \
-				draw/colors.c
+				draw/colors.c \
+				draw/gradient.c \
+				draw/themes.c
 
 SRCS_PARSING=	parsing/parsing.c
 

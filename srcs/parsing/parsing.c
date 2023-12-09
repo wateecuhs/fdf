@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:25:28 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:10:19 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 09:31:38 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ t_map_elem	*make_values(char ***tab, int i, int j)
 	if (!colors)
 		error_msg(NULL);
 	if (colors[1] != 0)
-		tmp->colors = ft_atoi_colors(colors[1]);
+		tmp->input_colors = ft_atoi_colors(colors[1]);
 	else
-		tmp->colors = 0xF2BAC9;
+		tmp->input_colors = 0xF2BAC9;
 	free_line(colors);
 	return (tmp);
 }

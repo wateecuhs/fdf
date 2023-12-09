@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 20:51:47 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 09:56:35 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	set_mods(t_map_elem ***map, t_mods *mods)
 	mods->z_angle = 0;
 	mods->offset_v = 0;
 	mods->offset_u = 0;
-	mods->color_preset = NULL;
+	mods->color_preset = (t_color_preset *)malloc(sizeof(t_color_preset));
+	mods->color_preset = set_theme_1(mods);
 	mods->scale = get_scale(map);
+	mods->use_preset = 1;
 }
 
 void	create_image(t_map_elem ***map, t_vars *vars)

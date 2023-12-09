@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 22:10:58 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 09:51:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_mods
 	int				offset_u;
 	int				offset_v;
 	float			scale;
+	int				use_preset;
 	t_color_preset	*color_preset;
 }			t_mods;
 
@@ -74,6 +75,7 @@ typedef struct s_map_elem
 	int			u;
 	int			v;
 	__uint32_t	colors;
+	__uint32_t	input_colors;
 }	t_map_elem;
 
 typedef struct s_coords
@@ -114,7 +116,8 @@ void			error_msg(char *str);
 int				cross_close(t_vars *vars);
 int				key_hook(int keycode, t_param *param);
 t_vars			*create_window(t_map_elem ***map);
-void			draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop, int i);
+void			draw_line(t_vars *vars, t_map_elem *start,
+					t_map_elem *stop, int i);
 void			transformations_img(t_map_elem ***map, t_vars *vars);
 void			apply_scale(t_map_elem ***map, float z_scale_quotient);
 void			apply_offset(t_map_elem ***map, t_coords offset);
@@ -149,9 +152,10 @@ void			put_cmds_txt(t_vars *vars);
 t_map_elem		*find_center(t_map_elem ***map);
 t_coords		apply_mods(t_map_elem map, t_mods *mods, t_coords offset);
 void			set_mods(t_map_elem ***map, t_mods *mods);
-t_color_preset	set_theme_1(void);
+t_color_preset	*set_theme_1(t_mods *mods);
 void			parse_keybind1(int keycode, t_param *param);
 void			parse_keybind2(int keycode, t_param *param);
-t_colors		get_gradient(t_colors start, t_colors stop, int distance);
+t_colors		get_gradient(t_colors start, t_colors stop, float distance);
+int				get_color(t_map_elem map, t_coords z_range, t_mods *mods);
 
 #endif
