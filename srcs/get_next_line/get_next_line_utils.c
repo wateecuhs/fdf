@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:02:44 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:21:12 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 10:43:38 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_stradd(char *s1, char *s2, int size)
 		return (ft_strdup(s1));
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + size + 1));
 	if (!str)
-		return (NULL);
+		return (free(s1), NULL);
 	i = 0;
 	while (s1[i])
 	{

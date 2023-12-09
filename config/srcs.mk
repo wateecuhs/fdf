@@ -19,12 +19,10 @@ SRCS_DRAW=		draw/draw_line.c \
 				draw/resize_wip.c \
 				draw/blackout.c \
 				draw/commands_text.c \
-				draw/mods.c \
-				draw/colors.c \
-				draw/gradient.c \
-				draw/themes.c
+				draw/mods.c
 
-SRCS_PARSING=	parsing/parsing.c
+SRCS_PARSING=	parsing/parsing.c \
+				parsing/make_values.c
 
 SRCS_ERRORS=	errors/errors.c
 
@@ -40,6 +38,7 @@ SRCS_UTILS=		utils/ft_split.c \
 				utils/ft_assign.c \
 				utils/find_middle.c
 
-SRCS_FREE=		free/free_init.c
+SRCS_FREE=		free/free_init.c \
+				free/free2.c
 
 TEST= test.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:13:19 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 22:13:26 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 10:34:18 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,18 @@ void	parse_keybind2_2(int keycode, t_param *param)
 		else if (param->vars->mods->z_angle > 360)
 			param->vars->mods->z_angle = param->vars->mods->z_angle % 360;
 	}
+}
+
+void	change_view(t_param *param)
+{
+	if (param->vars->mods->projection == 0)
+		param->vars->mods->projection = 1;
+	else if (param->vars->mods->projection == 1)
+		param->vars->mods->projection = 2;
+	else if (param->vars->mods->projection == 2)
+		param->vars->mods->projection = 0;
+	blackout_screen(param->vars);
+	transformations_img(param->map, param->vars);
+	mlx_put_image_to_window(param->vars->mlx,
+		param->vars->win, param->vars->img->addr, 0, 0);
 }

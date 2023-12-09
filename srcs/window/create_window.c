@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 09:56:35 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 11:21:45 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	set_mods(t_map_elem ***map, t_mods *mods)
 	mods->z_angle = 0;
 	mods->offset_v = 0;
 	mods->offset_u = 0;
-	mods->color_preset = (t_color_preset *)malloc(sizeof(t_color_preset));
-	mods->color_preset = set_theme_1(mods);
 	mods->scale = get_scale(map);
-	mods->use_preset = 1;
+	mods->projection = 0;
 }
 
 void	create_image(t_map_elem ***map, t_vars *vars)
@@ -37,26 +35,44 @@ void	create_image(t_map_elem ***map, t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->addr, 0, 0);
 }
 
-t_vars	*create_window(t_map_elem ***map)
+t_vars	*init_window(void)
 {
 	t_vars	*vars;
-	t_param	*param;
 
 	vars = (t_vars *)malloc(sizeof(t_vars) * 1);
-	param = (t_param *)malloc(sizeof(t_param) * 1);
+	if (!vars)
+		return (NULL);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, R_WIDTH, HEIGHT, "fdf - panger");
 	if (!(vars->win))
 		exit(EXIT_FAILURE);
 	vars->img = (t_img_vars *)malloc(sizeof(t_img_vars) * 1);
+	if (!(vars->img))
+		return (free(vars), NULL);
 	vars->mods = (t_mods *)malloc(sizeof(t_mods));
+	if (!(vars->mods))
+		return (free(vars->img), free(vars), NULL);
+	return (vars);
+}
+
+t_vars	*create_window(t_map_elem ***map)
+{
+	t_vars	*vars;
+	t_param	*param;
+
+	param = (t_param *)malloc(sizeof(t_param) * 1);
+	if (!param)
+		return (free_map(map), NULL);
+	vars = init_window();
+	if (!vars)
+		return (free_map(map), free(param), NULL);
 	set_mods(map, vars->mods);
 	put_cmds_txt(vars);
 	create_image(map, vars);
 	param->map = map;
 	param->vars = vars;
-	mlx_hook(vars->win, 17, 1L << 0, cross_close, vars);
+	mlx_hook(vars->win, 17, 1L << 0, cross_close, param);
 	mlx_hook(vars->win, 2, 1L << 0, key_hook, param);
 	mlx_loop(vars->mlx);
-	return (vars);
+	return (NULL);
 }

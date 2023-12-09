@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 09:51:54 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 11:11:58 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ typedef struct s_mods
 	int				offset_u;
 	int				offset_v;
 	float			scale;
-	int				use_preset;
-	t_color_preset	*color_preset;
+	int				projection;
 }			t_mods;
 
 typedef struct s_vars
@@ -75,7 +74,6 @@ typedef struct s_map_elem
 	int			u;
 	int			v;
 	__uint32_t	colors;
-	__uint32_t	input_colors;
 }	t_map_elem;
 
 typedef struct s_coords
@@ -113,7 +111,7 @@ typedef struct s_param
 }			t_param;
 
 void			error_msg(char *str);
-int				cross_close(t_vars *vars);
+int				cross_close(t_param *param);
 int				key_hook(int keycode, t_param *param);
 t_vars			*create_window(t_map_elem ***map);
 void			draw_line(t_vars *vars, t_map_elem *start,
@@ -152,10 +150,16 @@ void			put_cmds_txt(t_vars *vars);
 t_map_elem		*find_center(t_map_elem ***map);
 t_coords		apply_mods(t_map_elem map, t_mods *mods, t_coords offset);
 void			set_mods(t_map_elem ***map, t_mods *mods);
-t_color_preset	*set_theme_1(t_mods *mods);
 void			parse_keybind1(int keycode, t_param *param);
 void			parse_keybind2(int keycode, t_param *param);
-t_colors		get_gradient(t_colors start, t_colors stop, float distance);
-int				get_color(t_map_elem map, t_coords z_range, t_mods *mods);
+void			change_view(t_param *param);
+void			free_up_to(char ***str, int limit);
+void			free_up_to_map(t_map_elem ***str, int limit);
+void			free_line_map_up_to(t_map_elem **str, int limit);
+void			free_line_map(t_map_elem **str);
+t_map_elem		*make_values(char ***tab, int i, int j);
+void			free_tab_init(char ***str);
+void			free_param(t_param *param);
+void			free_map(t_map_elem ***map);
 
 #endif

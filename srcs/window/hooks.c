@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 21:16:17 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 11:10:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	cross_close(t_vars *vars)
+int	cross_close(t_param *param)
 {
-	mlx_destroy_image(vars->mlx, vars->img->addr);
-	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_image(param->vars->mlx, param->vars->img->addr);
+	mlx_destroy_window(param->vars->mlx, param->vars->win);
+	free_param(param);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -65,6 +66,7 @@ int	key_hook(int keycode, t_param *param)
 	{
 		mlx_destroy_image(param->vars->mlx, param->vars->img->addr);
 		mlx_destroy_window(param->vars->mlx, param->vars->win);
+		free_param(param);
 		exit(EXIT_SUCCESS);
 	}
 	if (keycode == 122 || keycode == 120 || keycode == 114 || keycode == 116)
@@ -78,5 +80,7 @@ int	key_hook(int keycode, t_param *param)
 		parse_keybind4(keycode, param);
 	if (keycode == 113)
 		reset_mods(param);
+	if (keycode == 32)
+		change_view(param);
 	return (0);
 }

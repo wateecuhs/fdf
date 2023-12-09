@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:25:28 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 09:31:38 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 11:22:05 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_map_elem	***map_parsing(char *path)
 
 	map_str = read_file(path);
 	map_tab = str_to_tab(map_str);
+	if (!map_tab)
+		perror("fdf: malloc failed");
 	nb_lines = 0;
 	while (map_tab[nb_lines])
 	{
@@ -31,6 +33,8 @@ t_map_elem	***map_parsing(char *path)
 		nb_lines++;
 	}
 	map = tab_to_map(map_tab, nb_lines, lines_len);
+	if (!map)
+		perror("fdf: malloc failed");
 	return (map);
 }
 
@@ -50,7 +54,10 @@ char	*read_file(char *path)
 		map = ft_strjoin(map, tmp);
 		free(tmp);
 		if (!map)
+		{
+			free(map);
 			error_msg(path);
+		}
 		tmp = get_next_line(fd);
 	}
 	return (map);
@@ -70,11 +77,13 @@ char	***str_to_tab(char *map_str)
 		i++;
 	map = (char ***)malloc(sizeof(char **) * (i + 1));
 	if (!map)
-		return (NULL);
+		return (free_line(map_lines), NULL);
 	i = 0;
 	while (map_lines[i])
 	{
 		map[i] = ft_split(map_lines[i], " ");
+		if (!(map[i]))
+			return (free_up_to(map, i), NULL);
 		i++;
 	}
 	map[i] = 0;
@@ -83,48 +92,45 @@ char	***str_to_tab(char *map_str)
 	return (map);
 }
 
-t_map_elem	*make_values(char ***tab, int i, int j)
+t_map_elem	**tab_to_map_loop(char ***tab, t_map_elem ***map, int i, int len)
 {
-	t_map_elem	*tmp;
-	char		**colors;
+	int	j;
 
-	tmp = (t_map_elem *)malloc(sizeof(t_map_elem) * 1);
-	tmp->x = j;
-	tmp->y = i;
-	tmp->z = ft_atoi(tab[i][j]);
-	colors = ft_split(tab[i][j], ",");
-	if (!colors)
-		error_msg(NULL);
-	if (colors[1] != 0)
-		tmp->input_colors = ft_atoi_colors(colors[1]);
-	else
-		tmp->input_colors = 0xF2BAC9;
-	free_line(colors);
-	return (tmp);
+	j = 0;
+	map[i] = (t_map_elem **)malloc(sizeof(t_map_elem *) * (len + 1));
+	if (!(map[i]))
+		return (free_up_to_map(map, i), NULL);
+	while (tab[i][j])
+	{
+		map[i][j] = make_values(tab, i, j);
+		if (!(map[i][j]))
+			return (free_line_map_up_to(map[i], j),
+				free_up_to_map(map, i), NULL);
+		j++;
+	}
+	map[i][j] = 0;
+	return (map[i]);
 }
 
 t_map_elem	***tab_to_map(char ***tab, int nb_lines, int line_len)
 {
 	t_map_elem	***map;
 	int			i;
-	int			j;
 
 	i = 0;
 	map = (t_map_elem ***)malloc(sizeof(t_map_elem **) * (nb_lines + 1));
+	if (!map)
+		return (NULL);
 	while (tab[i])
 	{
-		j = 0;
-		map[i] = (t_map_elem **)malloc(sizeof(t_map_elem *) * (line_len + 1));
-		while (tab[i][j])
+		if (tab_to_map_loop(tab, map, i, line_len) == NULL)
 		{
-			map[i][j] = make_values(tab, i, j);
-			j++;
+			free_tab_init(tab);
+			return (NULL);
 		}
-		free_line(tab[i]);
-		map[i][j] = 0;
 		i++;
 	}
-	free(tab);
+	free_tab_init(tab);
 	map[i] = 0;
 	return (map);
 }

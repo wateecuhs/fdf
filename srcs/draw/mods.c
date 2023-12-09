@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:07:10 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:55:14 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/09 11:21:21 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,15 @@ t_coords	apply_mods(t_map_elem map, t_mods *mods, t_coords offset)
 		map = rotation_z(map, mods->z_angle);
 	map.x += (offset.x * mods->scale);
 	map.y += (offset.y * mods->scale);
-	ret.x = (1 / sqrt(2)) * map.x + (1 / sqrt(2)) * map.y;
-	ret.y = -(1 / sqrt(6)) * map.x
-		+ (1 / sqrt(6)) * map.y - (2 / sqrt(6)) * map.z;
+	if (mods->projection == 1)
+		ret = assign_xy(map.x, map.y);
+	else if (mods->projection == 2)
+		ret = assign_xy(map.x + (0.5 * map.z), map.y + (0.5 * map.z));
+	else
+	{
+		ret.x = (1 / sqrt(2)) * map.x + (1 / sqrt(2)) * map.y;
+		ret.y = -(1 / sqrt(6)) * map.x
+			+ (1 / sqrt(6)) * map.y - (2 / sqrt(6)) * map.z;
+	}
 	return (ret);
 }
