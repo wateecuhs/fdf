@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 11:21:45 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:52:20 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_mods(t_map_elem ***map, t_mods *mods)
 
 void	create_image(t_map_elem ***map, t_vars *vars)
 {
-	vars->img->addr = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+	vars->img->addr = mlx_new_image(vars->mlx, R_WIDTH, HEIGHT);
 	vars->img->buffer = mlx_get_data_addr(vars->img->addr,
 			&(vars->img->pixel_bits),
 			&(vars->img->line_bytes),
@@ -55,6 +55,18 @@ t_vars	*init_window(void)
 	return (vars);
 }
 
+int	loop(t_param *param)
+{
+	if (param->vars->mods->new_img == 1)
+	{
+		mlx_destroy_image(param->vars->mlx, param->vars->img->addr);
+		create_image(param->map, param->vars);
+		put_cmds_txt(param->vars);
+		param->vars->mods->new_img = 0;
+	}
+	return (0);
+}
+
 t_vars	*create_window(t_map_elem ***map)
 {
 	t_vars	*vars;
@@ -67,12 +79,13 @@ t_vars	*create_window(t_map_elem ***map)
 	if (!vars)
 		return (free_map(map), free(param), NULL);
 	set_mods(map, vars->mods);
-	put_cmds_txt(vars);
 	create_image(map, vars);
+	put_cmds_txt(vars);
 	param->map = map;
 	param->vars = vars;
 	mlx_hook(vars->win, 17, 1L << 0, cross_close, param);
 	mlx_hook(vars->win, 2, 1L << 0, key_hook, param);
+	mlx_loop_hook(vars->mlx, loop, param);
 	mlx_loop(vars->mlx);
 	return (NULL);
 }

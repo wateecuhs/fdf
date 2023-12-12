@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:44:30 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 21:31:35 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:23:52 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	draw_line(t_vars *vars, t_map_elem *start, t_map_elem *stop, int i)
 	while (pixels--)
 	{
 		if (start_coords.y > 0 && start_coords.y < HEIGHT
-			&& start_coords.x > 0 && start_coords.x < WIDTH)
+			&& start_coords.x > 0 && start_coords.x < R_WIDTH)
 			draw_pixel(vars->img->buffer, calc_pixel(start_coords, vars),
 				add_delta(colors, colors_delta, i), vars->img->endian);
 		start_coords = assign_f_xy(start_coords.x

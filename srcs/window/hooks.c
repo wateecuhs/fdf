@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 11:10:12 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:15:29 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	parse_keybind3(int keycode, t_param *param)
 		param->vars->mods->offset_v += 25;
 	if (keycode == 65364)
 		param->vars->mods->offset_v -= 25;
-	blackout_screen(param->vars);
-	transformations_img(param->map, param->vars);
-	mlx_put_image_to_window(param->vars->mlx,
-		param->vars->win, param->vars->img->addr, 0, 0);
+	param->vars->mods->new_img = 1;
 }
 
 void	parse_keybind4(int keycode, t_param *param)
@@ -45,19 +42,13 @@ void	parse_keybind4(int keycode, t_param *param)
 		param->vars->mods->scale *= 1.05;
 	if (param->vars->mods->scale < 1 || param->vars->mods->scale > 1000)
 		param->vars->mods->scale = get_scale(param->map);
-	blackout_screen(param->vars);
-	transformations_img(param->map, param->vars);
-	mlx_put_image_to_window(param->vars->mlx,
-		param->vars->win, param->vars->img->addr, 0, 0);
+	param->vars->mods->new_img = 1;
 }
 
 void	reset_mods(t_param *param)
 {
 	set_mods(param->map, param->vars->mods);
-	blackout_screen(param->vars);
-	transformations_img(param->map, param->vars);
-	mlx_put_image_to_window(param->vars->mlx,
-		param->vars->win, param->vars->img->addr, 0, 0);
+	param->vars->mods->new_img = 1;
 }
 
 int	key_hook(int keycode, t_param *param)

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:36:01 by panger            #+#    #+#             */
-/*   Updated: 2023/12/08 17:07:40 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:25:56 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	blackout_screen(t_vars *vars)
 	pixel = 0;
 	colors = assign_color(0x000000);
 	pixely = 0;
-	while (pixely <= 1200)
+	while (pixely <= HEIGHT)
 	{
 		pixelx = 0;
-		while (pixelx <= 1200)
+		while (pixelx <= R_WIDTH)
 		{
 			pixel = pixely * vars->img->line_bytes
 				+ pixelx * (vars->img->pixel_bits / 8);
