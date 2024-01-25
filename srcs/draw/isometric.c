@@ -6,13 +6,13 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:35:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 10:39:36 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/25 16:22:21 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	offset_map(t_map_elem ***map)
+t_coords	offset_map(t_map_elem ***map)
 {
 	int	i;
 	int	j;
@@ -27,8 +27,8 @@ void	offset_map(t_map_elem ***map)
 			j++;
 		i++;
 	}
-	k = 0;
-	while (map[k])
+	k = -1;
+	while (map[++k])
 	{
 		l = 0;
 		while (map[k][l])
@@ -37,8 +37,8 @@ void	offset_map(t_map_elem ***map)
 			map[k][l]->y -= ((i - 1) / 2);
 			l++;
 		}
-		k++;
 	}
+	return (assign_xy((j - 1) / 2, (i - 1) / 2));
 }
 
 t_coords	offset_map_back(t_map_elem ***map)
@@ -68,8 +68,9 @@ void	apply_isometric(t_map_elem ***map, t_mods *mods)
 	t_coords	offset;
 
 	if (mods->projection == 0)
-		offset_map(map);
-	offset = offset_map_back(map);
+		offset = offset_map(map);
+	else
+		offset = offset_map_back(map);
 	i = 0;
 	while (map[i])
 	{

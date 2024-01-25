@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2024/01/25 13:27:01 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/25 16:11:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,54 @@ int	cross_close(t_param *param)
 	return (0);
 }
 
-void	parse_keybind3(int keycode, t_param *param)
+void	parse_keybind1(int keycode, t_param *param, int val)
+{
+	if (keycode == 122)
+		param->vars->mods->inputs[4] = val;
+	if (keycode == 120)
+		param->vars->mods->inputs[5] = val;
+	if (keycode == 114)
+		param->vars->mods->inputs[6] = val;
+	if (keycode == 116)
+		param->vars->mods->inputs[7] = val;
+	if (keycode == 102)
+		param->vars->mods->inputs[8] = val;
+	if (keycode == 103)
+		param->vars->mods->inputs[9] = val;
+	if (keycode == 118)
+		param->vars->mods->inputs[10] = val;
+	if (keycode == 98)
+		param->vars->mods->inputs[11] = val;
+}
+
+void	parse_keybind2(int keycode, t_param *param, int val)
 {
 	if (keycode == 65361)
-		param->vars->mods->inputs[0] = 1;
+		param->vars->mods->inputs[0] = val;
 	if (keycode == 65363)
-		param->vars->mods->inputs[1] = 1;
+		param->vars->mods->inputs[1] = val;
 	if (keycode == 65362)
-		param->vars->mods->inputs[2] = 1;
+		param->vars->mods->inputs[2] = val;
 	if (keycode == 65364)
-		param->vars->mods->inputs[3] = 1;
-
-}
-void	parse_keybind4(int keycode, t_param *param)
-{
+		param->vars->mods->inputs[3] = val;
 	if (keycode == 111)
-		param->vars->mods->inputs[12] = 1;
+		param->vars->mods->inputs[12] = val;
 	if (keycode == 112)
-		param->vars->mods->inputs[13] = 1;
+		param->vars->mods->inputs[13] = val;
 }
 
-void	reset_mods(t_param *param)
+void	change_view(t_param *param)
 {
-	set_mods(param->map, param->vars->mods);
+	if (param->vars->mods->projection == 0)
+		param->vars->mods->projection = 1;
+	else if (param->vars->mods->projection == 1)
+		param->vars->mods->projection = 2;
+	else if (param->vars->mods->projection == 2)
+		param->vars->mods->projection = 0;
 	param->vars->mods->new_img = 1;
 }
 
-int	key_hook(int keycode, t_param *param)
+int	key_press_hook(int keycode, t_param *param)
 {
 	if (keycode == 65307)
 	{
@@ -56,17 +77,13 @@ int	key_hook(int keycode, t_param *param)
 		free_param(param);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 122 || keycode == 120 || keycode == 114 || keycode == 116)
-		parse_keybind1(keycode, param);
-	if (keycode == 102 || keycode == 103 || keycode == 118 || keycode == 98)
-		parse_keybind2(keycode, param);
-	if (keycode == 65361 || keycode == 65363
-		|| keycode == 65362 || keycode == 65364)
-		parse_keybind3(keycode, param);
-	if (keycode == 111 || keycode == 112)
-		parse_keybind4(keycode, param);
+	parse_keybind1(keycode, param, 1);
+	parse_keybind2(keycode, param, 1);
 	if (keycode == 113)
-		reset_mods(param);
+	{
+		set_mods(param->map, param->vars->mods);
+		param->vars->mods->new_img = 1;
+	}
 	if (keycode == 32)
 		change_view(param);
 	return (0);

@@ -4,8 +4,6 @@
 
 Code can be optimized a lot, i parse the map too many times for no reason.
 
-I added poorly written code on the last commit but i probably wont clean it up
-
 ## how to use
 
 do 

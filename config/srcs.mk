@@ -10,7 +10,8 @@ SRCS= 			main.c \
 
 SRCS_WINDOW=	window/create_window.c \
 				window/hooks.c \
-				window/keys_parsing.c
+				window/mouse_hooks.c \
+				window/loop_hook.c
 
 SRCS_DRAW=		draw/draw_line.c \
 				draw/transformations.c \

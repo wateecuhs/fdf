@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2024/01/25 13:25:43 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/25 16:15:34 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct color_preset
 	__uint32_t	color4;
 }			t_color_preset;
 
+typedef struct s_coords
+{
+	int	x;
+	int	y;
+}			t_coords;
+
 typedef struct s_mods
 {
 	float			z_coefficient;
@@ -57,7 +63,9 @@ typedef struct s_mods
 	float			scale;
 	int				projection;
 	int				new_img;
-	int				inputs[14];
+	int				inputs[15];
+	int				mouse_press_x;
+	int				mouse_press_y;
 }			t_mods;
 
 typedef struct s_vars
@@ -77,12 +85,6 @@ typedef struct s_map_elem
 	int			v;
 	__uint32_t	colors;
 }	t_map_elem;
-
-typedef struct s_coords
-{
-	int	x;
-	int	y;
-}			t_coords;
 
 typedef struct s_colors
 {
@@ -114,7 +116,7 @@ typedef struct s_param
 
 void			error_msg(char *str);
 int				cross_close(t_param *param);
-int				key_hook(int keycode, t_param *param);
+int				key_press_hook(int keycode, t_param *param);
 t_vars			*create_window(t_map_elem ***map);
 void			draw_line(t_vars *vars, t_map_elem *start,
 					t_map_elem *stop, int i);
@@ -152,8 +154,8 @@ void			put_cmds_txt(t_vars *vars);
 t_map_elem		*find_center(t_map_elem ***map);
 t_coords		apply_mods(t_map_elem map, t_mods *mods, t_coords offset);
 void			set_mods(t_map_elem ***map, t_mods *mods);
-void			parse_keybind1(int keycode, t_param *param);
-void			parse_keybind2(int keycode, t_param *param);
+void			parse_keybind1(int keycode, t_param *param, int val);
+void			parse_keybind2(int keycode, t_param *param, int val);
 void			change_view(t_param *param);
 void			free_up_to(char ***str, int limit);
 void			free_up_to_map(t_map_elem ***str, int limit);
@@ -163,5 +165,11 @@ t_map_elem		*make_values(char ***tab, int i, int j);
 void			free_tab_init(char ***str);
 void			free_param(t_param *param);
 void			free_map(t_map_elem ***map);
+int				on_mouse_up_hook(int button, int x, int y, t_param *param);
+int				on_mouse_down_hook(int button, int x, int y, t_param *param);
+int				on_mouse_move_hook(int x, int y, t_param *param);
+void			update_mods(t_param *param);
+void			update_mods2(t_param *param);
+int				loop(t_param *param);
 
 #endif
