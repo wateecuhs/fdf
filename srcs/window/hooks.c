@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:48 by panger            #+#    #+#             */
-/*   Updated: 2023/12/12 13:15:29 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:27:01 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,21 @@ int	cross_close(t_param *param)
 void	parse_keybind3(int keycode, t_param *param)
 {
 	if (keycode == 65361)
-		param->vars->mods->offset_u += 25;
+		param->vars->mods->inputs[0] = 1;
 	if (keycode == 65363)
-		param->vars->mods->offset_u -= 25;
+		param->vars->mods->inputs[1] = 1;
 	if (keycode == 65362)
-		param->vars->mods->offset_v += 25;
+		param->vars->mods->inputs[2] = 1;
 	if (keycode == 65364)
-		param->vars->mods->offset_v -= 25;
-	param->vars->mods->new_img = 1;
-}
+		param->vars->mods->inputs[3] = 1;
 
+}
 void	parse_keybind4(int keycode, t_param *param)
 {
 	if (keycode == 111)
-		param->vars->mods->scale *= 0.95;
+		param->vars->mods->inputs[12] = 1;
 	if (keycode == 112)
-		param->vars->mods->scale *= 1.05;
-	if (param->vars->mods->scale < 1 || param->vars->mods->scale > 1000)
-		param->vars->mods->scale = get_scale(param->map);
-	param->vars->mods->new_img = 1;
+		param->vars->mods->inputs[13] = 1;
 }
 
 void	reset_mods(t_param *param)

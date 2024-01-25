@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2023/12/12 13:12:14 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:25:43 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_mods
 	float			scale;
 	int				projection;
 	int				new_img;
+	int				inputs[14];
 }			t_mods;
 
 typedef struct s_vars

@@ -47,7 +47,7 @@ all:
 			$(MAKE) $(NAME)
 
 test:	$(OBJS_TEST)
-	$(CC) $(FLAGS) $(INCLUDES) $(OBJS_TEST) $(LIBS) -o $(NAME)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS_TEST) $(LIBS) -o $(NAME)	
 
 $(NAME):	$(OBJS)
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
