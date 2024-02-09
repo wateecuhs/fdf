@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:46:14 by panger            #+#    #+#             */
-/*   Updated: 2023/12/09 11:13:29 by panger           ###   ########.fr       */
+/*   Updated: 2024/01/26 10:52:58 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		write(2, "Wrong number of arguments.", 27);
+		write(2, "Wrong number of arguments.\n", 28);
 		return (1);
 	}
 	map = map_parsing(argv[1]);

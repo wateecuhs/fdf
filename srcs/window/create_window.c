@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:06:53 by panger            #+#    #+#             */
-/*   Updated: 2024/01/25 16:14:53 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:02:40 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	set_mods(t_map_elem ***map, t_mods *mods)
 {
+	int	i;
+
 	mods->z_coefficient = 0.25;
 	mods->x_angle = 0;
 	mods->y_angle = 0;
@@ -22,8 +24,9 @@ void	set_mods(t_map_elem ***map, t_mods *mods)
 	mods->offset_u = 0;
 	mods->scale = get_scale(map);
 	mods->projection = 0;
-	for (int i = 0; i < 15; i++)
-		mods->inputs[i] = 0;
+	i = 0;
+	while (i < 15)
+		mods->inputs[i++] = 0;
 	mods->mouse_press_x = 0;
 	mods->mouse_press_y = 0;
 }

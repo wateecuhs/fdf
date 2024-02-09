@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:03 by panger            #+#    #+#             */
-/*   Updated: 2024/01/25 16:15:34 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:38:43 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,10 @@ void			free_map(t_map_elem ***map);
 int				on_mouse_up_hook(int button, int x, int y, t_param *param);
 int				on_mouse_down_hook(int button, int x, int y, t_param *param);
 int				on_mouse_move_hook(int x, int y, t_param *param);
-void			update_mods(t_param *param);
+void			update_mods1(t_param *param);
 void			update_mods2(t_param *param);
+void			update_mods3(t_param *param);
+void			update_mods4(t_param *param);
 int				loop(t_param *param);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:28:12 by panger            #+#    #+#             */
-/*   Updated: 2024/01/25 16:15:26 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:02:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ int	on_mouse_move_hook(int x, int y, t_param *param)
 {
 	if (param->vars->mods->inputs[14] == 1)
 	{
-		param->vars->mods->x_angle -= ((x - param->vars->mods->mouse_press_x) * 360 / WIDTH);
-		param->vars->mods->y_angle -= ((y - param->vars->mods->mouse_press_y) * 360 / HEIGHT);
+		param->vars->mods->x_angle -= ((x - param->vars->mods->mouse_press_x)
+				* 360 / WIDTH);
+		param->vars->mods->y_angle -= ((y - param->vars->mods->mouse_press_y)
+				* 360 / HEIGHT);
 		param->vars->mods->mouse_press_x = x;
 		param->vars->mods->mouse_press_y = y;
 	}
